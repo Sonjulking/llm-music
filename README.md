@@ -45,7 +45,7 @@
 
     ### 📏 지표 요약표
     | 지표 (Metric)            | 수치 기준 (Threshold) | 해석 (Interpretation) |
-    |:-----------------------| :--- | :--- |
+        |:-----------------------| :--- | :--- |
     | **BPM**                | 120 이상 | **빠르고 경쾌한** (활동성, 댄스) |
     | (Tempo)                | 90 미만 | **차분하고 느린** (이완, 발라드) |
     | **Energy**             | 0.05 초과 | **강렬하고 자극적인** (타악기/노이즈 성분 다수) |
@@ -69,17 +69,17 @@
 
 ### Frontend
 *   **React (Vite)**
-*   **TypeScript** 
+*   **TypeScript**
 *   **Framer Motion**: 부드러운 애니메이션 및 인터랙션 구현
 *   **Chart.js / React-Chartjs-2**: Sound DNA Radar Chart 시각화
 *   **Axios / Server-Sent Events (SSE)**: 백엔드와의 비동기 통신 및 실시간 진행률 표시
 
 ### Backend
-*   **Python (FastAPI)**: 
+*   **Python (FastAPI)**
 *   **Librosa**: 오디오 신호 처리 및 특징 추출 (BPM, Energy 등)
 *   **PyTorch & LAION CLAP**: 오디오-텍스트 멀티모달 임베딩 모델
 *   **ChromaDB**: 오디오 벡터 임베딩 저장 및 유사도 검색 (Vector Search)
-*   **MySQL (AWS RDS)**: 플레이리스트 메타데이터 관리
+*   **MySQL (AWS RDS)**: 플레이리스트 관리
 *   **Ollama**: 로컬 LLM (Gemma 3:27b) 실행 및 추론
 *   **yt-dlp**: 유튜브 오디오 데이터 추출
 
@@ -96,7 +96,7 @@
 ### 2. 오디오 특성 추출 (Feature Extraction)
 다운로드된 오디오는 두 가지 경로로 분석됩니다:
 *   **물리적 분석 (Physical Constraints):** `Librosa` 라이브러리를 사용하여 BPM, Energy, Brightness, Rhythmic Intensity 수치를 계산합니다. 이는 음악의 "구조적 특징"을 파악합니다.
-*   **의미적 분석 (Semantic Embedding):** `LAION CLAP` 모델이 90초 분량의 오디오를 15초 단위로 잘라 분석하고, 이를 512차원(또는 768차원) 벡터로 변환하여 평균값을 냅니다. 이는 음악의 "분위기(Mood)"를 수치화합니다.
+*   **의미적 분석 (Semantic Embedding):** `LAION CLAP` 모델이 90초 분량의 오디오를 15초 단위로 잘라 분석하고, 이를 512차원 벡터로 변환하여 평균값을 냅니다. 이는 음악의 "분위기(Mood)"를 수치화합니다.
 
 ### 3. 데이터 저장 (Vector Storage)
 *   분석된 벡터 데이터는 **ChromaDB**에 저장되어, 추후 빠른 유사도 검색에 사용됩니다.
@@ -104,9 +104,9 @@
 
 ### 4. 추천 및 검증 (Recommend & Verify)
 1.  **Sound Summary:** 사용자의 전체 플레이리스트 물리적 지표 평균을 계산하고, 이를 텍스트로 변환하여 LLM에게 전달합니다 (예: "빠르고 경쾌한 120BPM, 밝은 음색").
-2.  **LLM Reasoning:** Gemma 3는 이 요약 정보와 곡 목록을 보고 "이 사용자는 시원한 시티팝을 좋아한다"는 식의 페르소나를 도출하고, 어울릴만한 곡들을 제안합니다.
+2.  **LLM Reasoning:** Gemma 3는 이 요약 정보와 곡 목록을 보고 사용자의 페르소나를 도출(ex:힙합을 좋아하는 사용자다.)하고, 어울릴만한 곡들을 제안합니다.
 3.  **Cross-Validation:** 제안된 곡을 유튜브에서 검색하여 실제로 오디오를 다운로드한 뒤, 사용자의 기존 플레이리스트 벡터와 **코사인 유사도**를 계산합니다.
-    *   *LLM은 텍스트(제목)만 보고 추천하므로 소리 호불호를 모를 수 있지만, CLAP 벡터 검증을 통해 "실제 소리의 결"이 비슷한 곡만 필터링합니다.*
+    *   *LLM은 텍스트(제목)만 보고 추천하므로 소리 호불호를 모를 수 있지만, CLAP 벡터 검증을 통해 "실제 소리의 성격"이 비슷한 곡만 필터링합니다.*
 
 ---
 
