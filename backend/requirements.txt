@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+python-multipart
+ollama
+yt-dlp
+torch
+torchaudio
+librosa
+numpy
+chromadb
+mysql-connector-python
+transformers
+scikit-learn
+scipy
+accelerate
+python-dotenv
