@@ -21,7 +21,7 @@
     ### 📊 오디오 분석 지표 기준 및 과학적 근거
     본 프로젝트에서 사용하는 4가지 핵심 지표는 **Music Information Retrieval (MIR)** 분야의 표준 알고리즘을 기반으로 합니다.
 
-    #### 1. BPM (Tempo) - 음악의 심장박동
+    #### 1. BPM (Tempo) - 음악의 빠르기
     *   **근거:** Tzanetakis, G., & Cook, P. (2002). *Musical genre classification of audio signals*.
     *   **해석:** 120 BPM은 댄스 음악의 표준 템포(Disco/House)로 간주되며, 인간의 보행 속도(약 110-120 steps/min)와 유사하여 '흥분'과 '활동성'을 유발합니다. 반면 90 BPM 미만은 안정시 심박수(60-100)와 겹쳐 편안함을 줍니다.
 
